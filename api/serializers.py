@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Room, Exit, Note
+from .models import Room, Exit
 
 
 class RoomSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class ExitSerializer(serializers.ModelSerializer):
         model = Exit
         fields = ['source', 'destination', 'direction']
 
-
+"""
 class NoteSerializer(serializers.ModelSerializer):
     rooms = serializers.PrimaryKeyRelatedField(
         queryset=Room.objects.all())
@@ -29,3 +29,4 @@ class NoteSerializer(serializers.ModelSerializer):
         room = validated_data.pop('rooms')
         note = Note.objects.create(rooms=room, **validated_data)
         return note
+"""

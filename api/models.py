@@ -1,6 +1,28 @@
 from django.db import models
 
+class Exit(models.Model):
+    direction = models.TextField(primary_key=True)
+    source = models.ForeignKey('Room', on_delete=models.DO_NOTHING, db_column='source', related_name='source')
+    destination = models.ForeignKey('Room', on_delete=models.DO_NOTHING, db_column='destination', related_name='destination')
 
+    class Meta:
+        db_table = 'exit'
+        unique_together = (('direction', 'source', 'destination'),)
+
+
+class Room(models.Model):
+    id = models.TextField(primary_key=True)
+    shortdesc = models.TextField()
+    longdesc = models.TextField()
+    area = models.TextField(blank=True, null=True)
+    indoors = models.BooleanField(blank=True, null=True)
+    exits = models.TextField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'room'
+
+
+"""
 class Room(models.Model):
     shortdesc = models.TextField()
     longdesc = models.TextField()
@@ -36,3 +58,4 @@ class Note(models.Model):
 
     def __str__(self):
         return self.id, self.desc, self.rooms
+"""
