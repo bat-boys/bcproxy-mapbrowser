@@ -1,11 +1,17 @@
-from rest_framework import serializers
+from rest_framework import serializers  # type: ignore
 from .models import Room, Exit
+
+
+class AreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        fields = ["area"]
 
 
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ['shortdesc', 'longdesc', 'area', 'indoors', 'exits']
+        fields = ["shortdesc", "longdesc", "area", "indoors", "exits"]
 
 
 class ExitSerializer(serializers.ModelSerializer):
@@ -14,7 +20,8 @@ class ExitSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exit
-        fields = ['source', 'destination', 'direction']
+        fields = ["source", "destination", "direction"]
+
 
 """
 class NoteSerializer(serializers.ModelSerializer):

@@ -1,13 +1,21 @@
-from django.db import models
+from django.db import models  # type: ignore
+
 
 class Exit(models.Model):
     direction = models.TextField(primary_key=True)
-    source = models.ForeignKey('Room', on_delete=models.DO_NOTHING, db_column='source', related_name='source')
-    destination = models.ForeignKey('Room', on_delete=models.DO_NOTHING, db_column='destination', related_name='destination')
+    source = models.ForeignKey(
+        "Room", on_delete=models.DO_NOTHING, db_column="source", related_name="source"
+    )
+    destination = models.ForeignKey(
+        "Room",
+        on_delete=models.DO_NOTHING,
+        db_column="destination",
+        related_name="destination",
+    )
 
     class Meta:
-        db_table = 'exit'
-        unique_together = (('direction', 'source', 'destination'),)
+        db_table = "exit"
+        unique_together = (("direction", "source", "destination"),)
 
 
 class Room(models.Model):
@@ -19,7 +27,7 @@ class Room(models.Model):
     exits = models.TextField(blank=True, null=True)
 
     class Meta:
-        db_table = 'room'
+        db_table = "room"
 
 
 """
